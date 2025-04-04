@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>CRUD Usuários</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<h1>Cadastro de Usuários</h1>
+
+<div class="formulario">
+    <h2>Novo Usuário</h2>
+    <input type="text" id="idAcesso" placeholder="ID Acesso">
+    <input type="text" id="nome" placeholder="Nome">
+    <input type="text" id="telefone" placeholder="Telefone">
+    <input type="email" id="email" placeholder="Email">
+    <input type="file" accept="image/*" id="foto" placeholder="URL Foto">
+    <button id="botao-form">Adicionar</button>
+</div>
+
+<h2>Lista de Usuários</h2>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>ID Acesso</th>
+        <th>Nome</th>
+        <th>Telefone</th>
+        <th>Email</th>
+        <th>Foto</th>
+        <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody id="tabela-usuarios">
+    <!-- usuários serão inseridos aqui -->
+    </tbody>
+</table>
+
+<script src="script.js"></script>
+</body>
+</html>
