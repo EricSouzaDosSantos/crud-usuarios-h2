@@ -34,20 +34,18 @@ public class UsuarioController {
     }
 
     @PostMapping(consumes = "multipart/form-data")
-    public ResponseEntity<UsuariosDTO> cadastrarUsuario(@RequestPart(value = "usuario", required = false) UsuariosDTO usuario, @RequestParam(value = "foto", required = false) MultipartFile foto) {
-        usuarioService.cadastrarUsuario(usuario, foto);
-        return ResponseEntity.status(201).body(usuario);
+    public ResponseEntity<UsuariosDTO> cadastrarUsuario(
+            @RequestParam("idAcesso") String idAcesso,
+            @RequestParam("nome") String nome,
+            @RequestParam("telefone") String telefone,
+            @RequestParam("email") String email,
+            @RequestParam("foto") MultipartFile foto) {
+
+        UsuariosDTO usuarioDTO = new UsuariosDTO(idAcesso, nome, telefone, email, foto);
+        usuarioService.cadastrarUsuario(usuarioDTO);
+        return ResponseEntity.status(201).body(usuarioDTO);
     }
 
-//    @PostMapping("/uploadFoto")
-//    public ResponseEntity<String> uploadFoto(@RequestParam("file") MultipartFile foto) {
-//        try {
-//            String filePath = imagemService.storeFile(foto);
-//            return ResponseEntity.ok("Foto enviada com sucesso: " + filePath);
-//        } catch (IOException e) {
-//            return ResponseEntity.status(500).body("Erro ao enviar a foto");
-//        }
-//    }
 
     @PutMapping("/{id}")
     public ResponseEntity<Void> atualizarUsuario(@RequestBody UsuariosDTO usuario, @PathVariable Long id) {
