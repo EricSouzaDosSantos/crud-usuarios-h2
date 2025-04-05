@@ -29,7 +29,7 @@ function carregarUsuarios() {
                     <td>${usuario.nome}</td>
                     <td>${usuario.telefone}</td>
                     <td>${usuario.email}</td>
-                    <td><img src="${usuario.foto}" alt="foto"></td>
+                    <td><img src="./${usuario.caminhoImagem}" alt="foto"></td>
                     <td>
                         <button onclick="buscarUsuarioParaEditar(${usuario.id})">Editar</button>
                         <button onclick="apagarUsuario(${usuario.id})">Apagar</button>
@@ -42,30 +42,28 @@ function carregarUsuarios() {
 
 // Adicionar usuário
 function adicionarUsuario() {
-    const file = document.getElementById('foto');
-    const foto = new FormData();
-    foto.append('image', file.files[0]);
+    const arquivo = document.getElementById('foto').files[0];
+    const formData = new FormData();
 
-    const usuario = {
-        idAcesso: document.getElementById('idAcesso').value,
-        nome: document.getElementById('nome').value,
-        telefone: document.getElementById('telefone').value,
-        email: document.getElementById('email').value,
-    };
-
+    formData.append('idAcesso', document.getElementById('idAcesso').value);
+    formData.append('nome', document.getElementById('nome').value);
+    formData.append('telefone', document.getElementById('telefone').value);
+    formData.append('email', document.getElementById('email').value);
+    formData.append('foto', arquivo);
 
     fetch(apiURL, {
         method: 'POST',
-        headers: {'Content-Type': 'multipart/form-data'},
-        body: {usuario, foto}
+        body: formData
     })
-    .then(res => res.json())
-    .then(() => {
-        alert('Usuário adicionado com sucesso!');
-        limparCampos();
-        carregarUsuarios();
-    });
+        .then(res => res.json())
+        .then(() => {
+            alert('Usuário adicionado com sucesso!');
+            limparCampos();
+            carregarUsuarios();
+        })
+        .catch(err => console.error('Erro ao adicionar usuário:', err));
 }
+
 
 // Limpa campos do formulário
 function limparCampos(){
