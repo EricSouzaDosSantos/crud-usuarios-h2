@@ -30,7 +30,7 @@ public class ImagemService {
         Files.copy(file.getInputStream(), targetLocation);
 
         // Retornar o nome do arquivo
-        return targetLocation.toString();
+        return uploadDir+"/" + fileName;
     }
 
     public Path loadFile(String fileName) {
