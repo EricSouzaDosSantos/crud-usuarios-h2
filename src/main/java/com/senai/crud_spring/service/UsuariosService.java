@@ -18,13 +18,15 @@ public class UsuariosService {
 
     private final ImagemService imagemService;
 
-    public void cadastrarUsuario(UsuariosDTO usuarioDTO, MultipartFile foto) {
+    public void cadastrarUsuario(UsuariosDTO usuarioDTO) {
         try {
             Usuarios usuario = new Usuarios();
             usuario.setNome(usuarioDTO.nome());
             usuario.setIdAcesso(UUID.fromString(usuarioDTO.idAcesso()));
             usuario.setTelefone(usuarioDTO.telefone());
-            usuario.setCaminhoImagem(imagemService.storeFile(foto));
+            if (usuarioDTO.foto() != null && !usuarioDTO.foto().isEmpty()) {
+                usuario.setCaminhoImagem(imagemService.storeFile(usuarioDTO.foto()));
+            }
             usuario.setEmail(usuarioDTO.email());
             usuarioRepository.save(usuario);
         } catch (Exception e) {
