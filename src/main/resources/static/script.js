@@ -29,7 +29,7 @@ function carregarUsuarios() {
                     <td>${usuario.nome}</td>
                     <td>${usuario.telefone}</td>
                     <td>${usuario.email}</td>
-                    <td><img src="./${usuario.caminhoImagem}" alt="foto"></td>
+                    <td><img src="../../../../../img/84d37520-3e99-42f9-8bc3-34571c7aecbf_main-img.jpeg" alt="foto"></td>
                     <td>
                         <button onclick="buscarUsuarioParaEditar(${usuario.id})">Editar</button>
                         <button onclick="apagarUsuario(${usuario.id})">Apagar</button>
